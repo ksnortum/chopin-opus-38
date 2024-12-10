@@ -166,3 +166,13 @@ moveNoteColumnOff = \revert Staff.NoteColumn.force-hshift
 
 rotateHairpinA = \once \override Hairpin.rotation = #'(-6 -1 0)
 rotateHairpinB = \once \override Hairpin.rotation = #'(8 -1 0)
+
+moveAccidentalA = \once \override Accidental.X-extent = #'(0 . 0)
+
+moveNoteA = \once {
+  \override Accidental.X-extent = #'(0 . 0)
+  \override NoteColumn.force-hshift = #2
+  \override Accidental.extra-offset = #'(2.9 . 0)
+}
+
+noteHeadWidthA = \once \override NoteHead.extra-spacing-width = #'(-2 . 0)

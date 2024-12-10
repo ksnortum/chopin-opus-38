@@ -3,7 +3,6 @@
 \version "2.24.0"
 \language "english"
 
-\include "distributed-noteheads.ily"
 \include "other-variables.ily"
 
 % #(ly:expect-warning "no viable initial configuration found")
@@ -261,16 +260,14 @@ rightHandUpper = \relative {
     <b gs'> q <ds a'>) |
     
   \barNumberCheck 169
-  r16 <d' f>( q <gs, ds'> q <d' e>  q <gs, f'> q 
-    \distributeNoteHeads #1.5 #'(-1.25 1.25)
-    <d'! ds> <d! ds> \revertDistributeNoteHeads <gs, e'>) |
-  r16 <d' e>( q <c f> q <c fs>  q <b g'> q <bf d> q <bf e> |
+  r16 <d' f>( q <gs, ds'> q <d' e>  \voiceOne e f f \moveAccidentalA ds! 
+    \moveAccidentalA ds! e) |
+  \oneVoice r16 <d e>( q <c f> q <c fs>  q <b g'> q <bf d> q <bf e> |
   q16 <a f'!> q <a c> q <a d>) \voiceOne e'( c c b b e,) |
   \oneVoice r16 <c' f>( q <a ds> q <c e>) r <ds b'>( q <b gs'> q <ds a'>) |
-  r16 <d' f>( q <gs, ds'> q <d' e>  q <gs, f'> q
-    \distributeNoteHeads #1.5 #'(-1.25 1.25)
-    <d'! ds> <d! ds> \revertDistributeNoteHeads <gs, e'>) |
-  r16 <d' e>( q <c f> q <c fs>  q <b g'> q <bf d> q <bf e> |
+  r16 <d' f>( q <gs, ds'> q <d' e>  \voiceOne e f f \moveAccidentalA ds! 
+    \moveAccidentalA ds! e) |
+  \oneVoice r16 <d e>( q <c f> q <c fs>  q <b g'> q <bf d> q <bf e> |
   q16 <a f'!> q <a c> q <a d>) \voiceOne e'( c c b b e,) |
   \oneVoice r16 <a c>( <gs c> <g c> <fs c'> <f c'>  <f b> <e b'> <ds b'> <e b'>
     <f b> <e b'>) |
@@ -473,10 +470,13 @@ rightHandLower = \relative {
   s2. * 8 |
   
   \barNumberCheck 169
-  s2. * 2 |
+  s4. d'16 gs, gs \moveNoteA d'! \moveNoteA d! \noteHeadWidthA gs, |
+  s2. |
   s4. a8 ds, d |
-  s2. * 3 |
-  s4. a''8 ds, d |
+  s2. |
+  s4. d''16 g, g \moveNoteA d'! \moveNoteA d! \noteHeadWidthA g, |
+  s2. |
+  s4. a8 ds, d |
   s2. |
   
   \barNumberCheck 177
