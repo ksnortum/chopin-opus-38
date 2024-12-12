@@ -24,6 +24,7 @@
   ragged-right = ##f
   ragged-last-bottom = ##f
   min-systems-per-page = 5
+  page-count = 9
 
   system-system-spacing =
     #'((basic-distance . 8) 
@@ -51,7 +52,7 @@
 \layout {
   \context {
     \Score
-    % \omit BarNumber % TODO uncomment
+    \omit BarNumber
     \override Slur.details.free-head-distance = 0.75
   }
   \context {

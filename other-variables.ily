@@ -9,19 +9,12 @@ makeSpanner =
 #(define-music-function (mrkup) (markup?)
   #{
     \override TextSpanner.bound-details.left.text = #mrkup
-    \override TextSpanner.bound-details.left.stencil-align-dir-y = 0 % 0.25
+    \override TextSpanner.bound-details.left.stencil-align-dir-y = 0
     \override TextSpanner.bound-details.left-broken.text = ##f
   #})
 
 smorzandoSpanner = \makeSpanner \markup \large \italic smorzando
 rallentSpanner = \makeSpanner \markup \large \italic rallent.
-
-%{
-sempreDimMarkup = \markup \large \italic "sempre dim."
-sempreDim =
-  #(make-music 'DecrescendoEvent 'span-direction START 'span-type 'text
-               'span-text sempreDimMarkup)
-%}
 
 %
 % Redefine
@@ -51,40 +44,6 @@ lowerFermata = {
   \textEndMark \markup { \musicglyph "scripts.dfermata" }
 }
 
-%{
-tupletOff = {
-  \omit TupletBracket
-  \omit TupletNumber
-}
-
-tupletOn = {
-  \undo \omit TupletBracket
-  \undo \omit TupletNumber
-}
-
-strictSpacingOn = {
-  \override Score.SpacingSpanner.strict-note-spacing = ##t
-  \newSpacingSection
-}
-
-strictSpacingOff = {
-  \override Score.SpacingSpanner.strict-note-spacing = ##f
-  \newSpacingSection
-}
-
-barLinesOff = {
-  \omit Staff.BarLine 
-  \omit Score.SpanBar
-}
-
-barLinesOn = {
-  \undo \omit Staff.BarLine
-  \undo \omit Score.SpanBar
-}
-
-makeHalfNote = \tweak duration-log 1 \etc
-%}
-
 %
 % Markup
 %
@@ -94,46 +53,85 @@ marcatoMarkup = \markup \large \italic marcato
 stretto = \markup \large \italic stretto
 riten = \markup \large \italic riten.
 accel = \markup \large \italic accel.
-% ten = \markup \large \italic ten.
-% ms = \markup \large \italic m.s.
-% md = \markup \large \italic m.d.
-% smorz = \markup \large \italic smorz.
-% accelerando = \markup \large \italic accelerando
-% accel = \markup \large \italic accel.
-% agitato = \markup \large \italic agitato
-% animato = \markup \large \italic animato
-% calando = \markup \large \italic calando
-% crescMarkup = \markup \large \italic cresc.
-% semprePiuMosso = \markup \large \italic "sempre più mosso"
-% semprePiuAnimato = \markup \large \italic "sempre più animato"
 piuMosso = \markup \large \italic "più mosso"
 agitatoESempreForte = \markup \large \italic "agitato e sempre forte"
 sotoVoce = \markup \large \italic "soto voce"
-% conForza = \markup \large \italic "con forza"
 aTempo = \markup \large \italic "a tempo"
-% menoForte = \markup \large \italic "(meno forte)"
-% nonDimin = \markup \large \italic "(non dimin.)"
-% sempreForte = \markup \large \italic "sempre forte"
-% dimRallent = \markup \large \italic "dim. rallent."
-% pocoRiten = \markup \large \italic "poco riten."
-% fPesante = \markup { \dynamic f \normal-text \large \italic pesante }
-% PpSempreSottoVoce = \markup { 
-%   \dynamic pp \normal-text \large \italic \pad-markup #0.1 "sempre sotto voce"
-% }
 menoF = \markup { \concat { \large "(meno " \dynamic f \large ")" } }
-% pScherzando = 
-%   \markup { \concat { "(" \dynamic p ") " \large "scherzando" } }
-% pRiten = \markup { \dynamic p \large \italic riten. }
-% fffPocoRiten = \markup { 
-%   \dynamic fff \large \italic \whiteout \pad-markup #0.25 "poco riten." 
-% }
 sempreF = \markup { \large \italic sempre \dynamic f }
-% trillSharp = \markup \teeny \sharp
-% sfMarkup = \markup \dynamic sf
 
 %
 % Positions and shapes
 %
+
+slurShapeA = \shape #'(
+                        ((0 . 2.5) (0 . 2.5) (0 . 2.5) (0 . 2.5))
+                        ((0 . 0) (0 . 0) (0 . 0) (0 . 0))
+                      ) \etc
+slurShapeB = \shape #'(
+                        ((0 . 0) (0 . 0) (0 . 0) (0 . 0))
+                        ((0 . 0) (0 . 0) (0 . 1) (0 . 1.5))
+                      ) \etc
+slurShapeC = \shape #'(
+                        ((0 . 2.25) (0 . 2.25) (0 . 2.5) (0 . 2.5))
+                        ((0 . 0) (0 . 0) (0 . 0) (0 . 0))
+                      ) \etc
+slurShapeD = \shape #'(
+                        ((0 . 2.5) (0 . 2.5) (0 . 2.5) (0 . 2.5))
+                        ((0 . 0) (0 . 0) (0 . 0) (0 . 0))
+                      ) \etc
+slurShapeE = \shape #'((0 . 0) (0 . 0) (0 . 2) (0 . 0)) \etc
+slurShapeF = \shape #'(
+                        ((0 . 0) (0 . 0) (0 . 0) (0 . 0))
+                        ((0 . 0) (0 . 0) (0 . 1.5) (0 . -2))
+                      ) \etc
+slurShapeG = \shape #'((0 . -1) (0 . 0) (0 . 0) (0 . 0)) \etc
+slurShapeH = \shape #'(
+                        ((0 . 2) (0 . 2) (0 . 0) (0 . 0))
+                        ((0 . 0) (0 . 0) (0 . 0) (0 . 0))
+                      ) \etc
+slurShapeI = \shape #'((0 . 0) (0 . 0) (0 . 2) (0 . 0)) \etc
+slurShapeJ = \shape #'(
+                        ((0 . 0) (0 . 0) (0 . 1) (0 . 0))
+                        ((0 . 0) (0 . 0) (0 . 2.75) (0 . 2.75))
+                      ) \etc
+slurShapeK = \shape #'((0 . 0.5) (0 . -1) (0 . -2) (0 . 0)) \etc
+slurShapeL = \shape #'(
+                        ((0 . 3) (0 . 2) (0 . 0.5) (0 . 0))
+                        ((0 . 0) (0 . 0) (0 . 1) (0 . 3))
+                      ) \etc
+slurShapeM = \shape #'(
+                        ((0 . 2.5) (0 . 2) (0 . 0.75) (0 . 0))
+                        ((0 . 0) (0 . 0) (0 . 1) (0 . 3))
+                      ) \etc
+slurShapeN = \shape #'((0 . 3) (0 . -0.5) (0 . -0.5) (0 . 3)) \etc
+slurShapeO = \shape #'(
+                        ((0 . 2.5) (0 . 1.5) (0 . 0.5) (0 . 0))
+                        ((0 . 0) (0 . 0) (0 . 1) (0 . 3))
+                      ) \etc
+slurShapeP = \shape #'(
+                        ((0 . 2.5) (0 . 2) (0 . 0.75) (0 . 0))
+                        ((0 . 0) (0 . 0) (0 . 1) (0 . 2.5))
+                      ) \etc
+slurShapeQ = \shape #'((0 . 0.5) (2 . 0) (0 . 0) (0 . 0)) \etc
+slurShapeR = \shape #'((0 . 0) (0 . 0) (0 . 1.5) (0 . 0)) \etc
+slurShapeS = \shape #'((0 . 1.5) (0 . 1.5) (0 . 0) (0 . 0)) \etc
+slurShapeT = \shape #'((0 . 1.5) (0 . -0.5) (0 . 0) (0 . 0)) \etc
+slurShapeU = \shape #'((0 . 0) (0 . 0) (0 . 0) (0 . 2.25)) \etc
+slurShapeV = \shape #'(
+                        ((0 . 2.5) (0 . 1.5) (0 . 0.5) (0 . 0))
+                        ((0 . 0) (0 . 0) (0 . 0.5) (0 . 1))
+                      ) \etc
+slurShapeW = \shape #'(
+                        ((0 . 2.5) (0 . 1.5) (0 . 0.5) (0 . 0))
+                        ((0 . 0) (0 . 0) (0 . 0.75) (0 . 2.25))
+                      ) \etc
+
+tieShapeA = \shape #'((0 . 0) (0 . 0) (1.25 . 0) (1.25 . 0)) \etc
+tieShapeB = \shape #'(
+                       ((0 . -0.4) (0 . -0.5) (0 . -0.5) (0 . -0.4))
+                       ((0 . 0) (0 . 0) (0 . 0) (0 . 0))
+                     ) \etc
 
 moveArpeggioA = 
   \tweak positions #'(-4 . 1) 
@@ -156,12 +154,13 @@ moveArpeggioC =
   \tweak vertical-skylines ##f
   \etc
   
-moveParenA = \override TextScript.extra-offset = #'(0.5 . 1.25)
+moveParenA = \override TextScript.extra-offset = #'(0.5 . 1.75)
 moveParenB = \override TextScript.extra-offset = #'(0 . -1)
 moveParenOff = \revert TextScript.extra-offset
   
 moveNoteColumnA = \override Staff.NoteColumn.extra-offset = #'(0 . -3)
 moveNoteColumnB = \override Staff.NoteColumn.force-hshift = 3
+moveNoteColumnC = \once \override Staff.NoteColumn.force-hshift = -1
 moveNoteColumnOff = \revert Staff.NoteColumn.force-hshift
 
 rotateHairpinA = \once \override Hairpin.rotation = #'(-6 -1 0)
@@ -174,5 +173,6 @@ moveNoteA = \once {
   \override NoteColumn.force-hshift = #2
   \override Accidental.extra-offset = #'(2.9 . 0)
 }
+moveNoteB = \once \override NoteColumn.X-offset = -2
 
 noteHeadWidthA = \once \override NoteHead.extra-spacing-width = #'(-2 . 0)
